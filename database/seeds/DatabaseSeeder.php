@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // 自分用のユーザーを作成
+        factory(App\User::class)->create(
+            ['name' => '自分', 'email' => 'test@test.com']
+        );
+
+        // 他のユーザーを作成
+        factory(App\User::class, 9)->create();
     }
 }
