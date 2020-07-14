@@ -19,7 +19,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            // 認証区分がある（'admin'）の時は、route('admin.top'）にリダイレクトさせ、そうでない時は、'/'にリダイレクトさせる
+            $url = ($guard) ? route($guard.'.top'): '/';
+            return redirect($url);
         }
 
         return $next($request);

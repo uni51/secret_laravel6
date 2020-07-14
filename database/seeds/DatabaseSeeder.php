@@ -18,5 +18,11 @@ class DatabaseSeeder extends Seeder
 
         // 他のユーザーを作成
         factory(App\User::class, 9)->create();
+
+        // 管理者を作成
+        factory(App\Admin::class)->create(
+            ['username' => 'taro', 'password' => bcrypt('jiro')]
+        );
+
     }
 }
