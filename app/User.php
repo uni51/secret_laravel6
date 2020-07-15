@@ -29,4 +29,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * A user has many messages
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
+    /**
+     * ユーザーの一覧を取得（プルダウン用）
+     */
+    public static function getUserList()
+    {
+        // 値がname、キーがidのコレクションを取得できる
+        return static::latest()->pluck('name', 'id');
+    }
 }
