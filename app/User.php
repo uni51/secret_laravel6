@@ -40,6 +40,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Boot
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->messages()->delete();
+        });
+    }
+
+    /**
      * ユーザーの一覧を取得（プルダウン用）
      */
     public static function getUserList()
